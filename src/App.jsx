@@ -50,7 +50,7 @@ function App() {
           <Route
             path="/*"
             element={
-              <WebSocketProvider url={`ws://localhost:9090/ws?token=${token}`}>
+              <WebSocketProvider url={`${import.meta.env.VITE_WEBSOCKET_URL}?token=${token}`}>
                 <Routes>
                   <Route
                     path="/chat"

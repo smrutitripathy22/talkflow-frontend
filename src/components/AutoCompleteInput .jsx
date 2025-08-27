@@ -60,7 +60,7 @@ const AutoCompleteInput = ({ suggestions = [], onConnect, onBlock }) => {
                 <div className="flex items-center gap-3">
                   <img
                     src={
-                      person.profileImage ||
+                     
                       `https://ui-avatars.com/api/?name=${encodeURIComponent(
                         `${person.firstName} ${person.lastName}`
                       )}`

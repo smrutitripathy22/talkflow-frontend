@@ -5,7 +5,7 @@ export const allGroups = async (fSuccess, fError) => {
     let res = await axiosInstance.get(`/group`);
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 
@@ -14,7 +14,7 @@ export const allMembers = async (groupId, fSuccess, fError) => {
     let res = await axiosInstance.get(`/group/members/${groupId}`);
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 export const nonMembers = async (groupId, fSuccess, fError) => {
@@ -22,7 +22,7 @@ export const nonMembers = async (groupId, fSuccess, fError) => {
     let res = await axiosInstance.get(`/group/non-members/${groupId}`);
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 export const allChats = async (groupId, fSuccess, fError) => {
@@ -30,7 +30,7 @@ export const allChats = async (groupId, fSuccess, fError) => {
     let res = await axiosInstance.get(`/group/chats/${groupId}`);
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 export const createGroup = async (body, fSuccess, fError) => {

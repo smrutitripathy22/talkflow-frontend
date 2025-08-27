@@ -2,7 +2,7 @@ import axios from "axios";
 import { isTokenExpired } from "./tokenValidation";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:9090",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 axiosInstance.interceptors.request.use((config) => {

@@ -5,7 +5,7 @@ export const allConnections = async (fSuccess, fError) => {
     let res = await axiosInstance.get("/connection/all");
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 export const unConnections = async (fSuccess, fError) => {
@@ -14,7 +14,7 @@ export const unConnections = async (fSuccess, fError) => {
 
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 export const sendConnectionRequest = async (userId, fSuccess, fError) => {
@@ -23,7 +23,7 @@ export const sendConnectionRequest = async (userId, fSuccess, fError) => {
  
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 
@@ -32,7 +32,7 @@ export const blockUser = async (userId, fSuccess, fError) => {
     let res = await axiosInstance.post(`/connection/blocked/${userId}`);
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 
@@ -47,7 +47,7 @@ export const acceptConnectionRequest = async (
     );
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 
@@ -62,7 +62,7 @@ export const withdrawConnectionRequest = async (
     );
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 export const rejectConnectionRequest = async (
@@ -76,7 +76,7 @@ export const rejectConnectionRequest = async (
     );
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };
 export const unblockUser = async (connectionId, fSuccess, fError) => {
@@ -86,6 +86,6 @@ export const unblockUser = async (connectionId, fSuccess, fError) => {
     );
     if (res.data) fSuccess(res.data.data);
   } catch (error) {
-    fError(error);
+   fError(error.response.data)
   }
 };

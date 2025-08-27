@@ -19,7 +19,7 @@ const Settings = () => {
     firstName: "",
     middleName: "",
     lastName: "",
-    profileImage: "",
+    profileUrl: "",
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
@@ -51,30 +51,40 @@ const Settings = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "profileImage" && files.length > 0) {
+    if (name === "profileUrl" && files.length > 0) {
       const url = URL.createObjectURL(files[0]);
-      setFormData((prev) => ({ ...prev, profileImage: url, profileImageFile: files[0] }));
+      setFormData((prev) => ({ ...prev, profileUrl: url, profileImageFile: files[0] }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
-  const submitProfile = (e) => {
-    e.preventDefault();
-    setLoaderCount((ps) => ps + 1);
-    updateProfile(
-      formData,
-      () => {
-        setAlertInfo({ show: true, message: "Profile updated successfully!", type: "success" });
-        setLoaderCount((ps) => ps - 1);
-      },
-      (error) => {
-     
-        setAlertInfo({ show: true, message: error.message || "Failed to update profile.", type: "error" });
-        setLoaderCount((ps) => ps - 1);
-      }
-    );
-  };
+ const submitProfile = (e) => {
+  e.preventDefault();
+  setLoaderCount((ps) => ps + 1);
+
+  const formDataToSend = new FormData();
+  formDataToSend.append("firstName", formData.firstName || "");
+  formDataToSend.append("middleName", formData.middleName || "");
+  formDataToSend.append("lastName", formData.lastName || "");
+
+  if (formData.profileImageFile) {
+    formDataToSend.append("profileImage", formData.profileImageFile);
+  }
+
+  updateProfile(
+    formDataToSend,
+    () => {
+      setAlertInfo({ show: true, message: "Profile updated successfully!", type: "success" });
+      setLoaderCount((ps) => ps - 1);
+      getAccountDetails(); 
+    },
+    (error) => {
+      setAlertInfo({ show: true, message: error.message || "Failed to update profile.", type: "error" });
+      setLoaderCount((ps) => ps - 1);
+    }
+  );
+};
 
   const submitPassword = (e) => {
     e.preventDefault();
@@ -144,14 +154,14 @@ const Settings = () => {
               <h2 className="text-lg font-semibold text-fuchsia-700 mb-3">My Profile</h2>
               <div className="flex items-center gap-5 mb-6">
                 <img
-                  src={formData.profileImage || "https://ui-avatars.com/api/?name=User"}
+                  src={formData?.profileUrl || "https://ui-avatars.com/api/?name=User"}
                   alt="Profile"
                   className="w-20 h-20 rounded-full object-cover border"
                 />
                 <label className="flex items-center gap-2 text-sm text-fuchsia-600 cursor-pointer hover:underline">
                   <FiUpload className="text-base" />
                   <span>Change profile picture</span>
-                  <input type="file" name="profileImage" accept="image/*" onChange={handleChange} className="hidden" />
+                  <input type="file" name="profileUrl" accept="image/*" onChange={handleChange} className="hidden" />
                 </label>
               </div>
               <div className="grid md:grid-cols-3 gap-4 mb-4">

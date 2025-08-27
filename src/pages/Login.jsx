@@ -86,7 +86,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:9090/oauth2/authorization/google";
+    window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
   };
 
   return (

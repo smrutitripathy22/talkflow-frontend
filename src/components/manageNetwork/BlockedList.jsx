@@ -14,6 +14,7 @@ const BlockedList = ({ list = [], onUnblock }) => {
             >
               <div className="flex items-center space-x-4">
                 <Avatar
+        
                   name={`${conn.firstName} ${conn.middleName} ${conn.lastName}`}
                 />
                 <div>

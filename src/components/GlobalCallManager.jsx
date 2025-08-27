@@ -46,7 +46,7 @@ export default function GlobalCallManager({ incomingCall, setIncomingCall }) {
           setIncomingCall(null);
           ringtoneRef.current?.pause();
           ringtoneRef.current.currentTime = 0;
-          alert("Call declined");
+         
           break;
 
         case "call-end":
