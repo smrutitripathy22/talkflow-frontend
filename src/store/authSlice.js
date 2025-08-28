@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  token: localStorage.getItem("auth_token") || null,
-  user: JSON.parse(localStorage.getItem("auth_user")) || null,
+  token: localStorage.getItem("talkflow_auth_token") || null,
+  user: JSON.parse(localStorage.getItem("talkflow_auth_user")) || null,
 };
 
 const authSlice = createSlice({
@@ -12,14 +12,14 @@ const authSlice = createSlice({
     loginSuccess: (state, action) => {
       state.token = action.payload.token;
       state.user = action.payload.user;
-      localStorage.setItem("auth_token", action.payload.token);
-      localStorage.setItem("auth_user", JSON.stringify(action.payload.user));
+      localStorage.setItem("talkflow_auth_token", action.payload.token);
+      localStorage.setItem("talkflow_auth_user", JSON.stringify(action.payload.user));
     },
     logout: (state) => {
       state.token = null;
       state.user = null;
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("auth_user");
+      localStorage.removeItem("talkflow_auth_token");
+      localStorage.removeItem("talkflow_auth_user");
     },
   },
 });
